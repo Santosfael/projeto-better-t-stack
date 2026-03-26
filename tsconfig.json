@@ -1,0 +1,3 @@
+{
+  "extends": "@api-proffy/config/tsconfig.base.json"
+}
