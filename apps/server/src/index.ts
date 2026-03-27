@@ -16,6 +16,9 @@ const fastify = Fastify({
   logger: true,
 });
 
+const port = env.PORT;
+const host = env.HOST;
+
 await fastify.register(fastifySwagger, {
   openapi: {
     openapi: "3.1.0",
@@ -56,10 +59,10 @@ await fastify.register(fastifyApiReference, {
   },
 });
 
-fastify.listen({ port: 3000 }, (err) => {
+fastify.listen({ port, host }, (err) => {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
   }
-  console.log("Server running on port 3000");
+  console.log(`Server running on http://${host}:${port}`);
 });
