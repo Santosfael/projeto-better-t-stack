@@ -4,6 +4,8 @@ import fastifySwagger from "@fastify/swagger";
 import fastifyApiReference from "@scalar/fastify-api-reference";
 import Fastify from "fastify";
 
+import { userRoutes } from "@/routes/users";
+
 const baseCorsConfig = {
   origin: env.CORS_ORIGIN,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -31,6 +33,7 @@ await fastify.register(fastifySwagger, {
 });
 
 fastify.register(fastifyCors, baseCorsConfig);
+fastify.register(userRoutes);
 
 fastify.get(
   "/",
