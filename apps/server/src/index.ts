@@ -5,6 +5,7 @@ import fastifyApiReference from "@scalar/fastify-api-reference";
 import Fastify from "fastify";
 
 import { userRoutes } from "@/routes/users";
+import type { ZodTypeProvider } from "fastify-type-provider-zod";
 
 const baseCorsConfig = {
   origin: env.CORS_ORIGIN,
@@ -15,8 +16,16 @@ const baseCorsConfig = {
 };
 
 const fastify = Fastify({
-  logger: true,
-});
+  logger: {
+    transport: {
+      target: "pino-pretty",
+      options: {
+        translateTime: "HH:MM:ss Z",
+        ignore: "pid,hostname"
+      }
+    }
+  }
+}).withTypeProvider<ZodTypeProvider>();
 
 const port = env.PORT;
 const host = env.HOST;
