@@ -6,6 +6,7 @@ import Fastify from "fastify";
 
 import { userRoutes } from "@/routes/users";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
+import fastifyCookie from "@fastify/cookie";
 
 const baseCorsConfig = {
   origin: env.CORS_ORIGIN,
@@ -42,6 +43,9 @@ await fastify.register(fastifySwagger, {
 });
 
 fastify.register(fastifyCors, baseCorsConfig);
+fastify.register(fastifyCookie, {
+  secret: env.COOKIE_SECRET
+})
 fastify.register(userRoutes);
 
 fastify.get(

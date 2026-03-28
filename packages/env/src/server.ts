@@ -9,6 +9,8 @@ export const env = createEnv({
     HOST: z.string().min(1).default("0.0.0.0"),
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
     PORT: z.coerce.number().int().min(1).max(65535).default(3000),
+    COOKIE_SECRET: z.string(),
+    JWT_TOKEN: z.string()
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
