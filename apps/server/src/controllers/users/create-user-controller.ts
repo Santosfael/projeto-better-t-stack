@@ -34,11 +34,13 @@ export async function createUserController({
       name,
       email,
       password: await hashPassword(password),
+      role: "student",
     })
     .returning({
       id: users.id,
       name: users.name,
       email: users.email,
+      role: users.role,
       createdAt: users.createdAt,
       updatedAt: users.updatedAt,
     });
